@@ -148,6 +148,24 @@ for k in push_config:
         push_config[k] = v
 
 
+def _as_bool(value, default: bool = False) -> bool:
+    """
+    将环境变量字符串转换为布尔值。
+    - 支持: true/false, 1/0, yes/no, on/off（大小写不敏感）
+    - 传入 bool 时原样返回
+    """
+    if value is None:
+        return default
+    if isinstance(value, bool):
+        return value
+    s = str(value).strip().lower()
+    if s in {"1", "true", "yes", "y", "on"}:
+        return True
+    if s in {"0", "false", "no", "n", "off"}:
+        return False
+    return default
+
+
 def bark(title: str, content: str) -> None:
     """
     使用 bark 推送消息。
@@ -1065,7 +1083,7 @@ def add_notify_function():
     notify_function = []
     if push_config.get("BARK_PUSH"):
         notify_function.append(bark)
-    if push_config.get("CONSOLE"):
+    if _as_bool(push_config.get("CONSOLE"), default=False):
         notify_function.append(console)
     if push_config.get("DD_BOT_TOKEN") and push_config.get("DD_BOT_SECRET"):
         notify_function.append(dingding_bot)
@@ -1149,8 +1167,8 @@ def send(title: str, content: str, ignore_default_config: bool = False, **kwargs
             logger.info(f"{title} 在SKIP_PUSH_TITLE环境变量内，跳过推送！")
             return
 
-    hitokoto = push_config.get("HITOKOTO")
-    content += "\n\n" + one() if hitokoto != "false" else ""
+    if _as_bool(push_config.get("HITOKOTO"), default=True):
+        content += "\n\n" + one()
 
     notify_function = add_notify_function()
 

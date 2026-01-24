@@ -41,6 +41,7 @@ RUN pip install --upgrade pip setuptools wheel && \
 
 # 复制应用代码
 COPY rainyun.py .
+COPY config.py .
 COPY notify.py .
 COPY stealth.min.js .
 COPY api_client.py .

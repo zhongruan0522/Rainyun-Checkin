@@ -7,12 +7,10 @@ import os
 from datetime import datetime
 from typing import Optional
 
+from config import DEFAULT_RENEW_COST_7_DAYS
 from api_client import RainyunAPI, RainyunAPIError
 
 logger = logging.getLogger(__name__)
-
-# 默认续费成本（当 API 未返回价格时的兜底值）
-DEFAULT_RENEW_COST_7_DAYS = 2258
 
 
 class ServerInfo:

@@ -8,13 +8,9 @@ from typing import Optional
 
 import requests
 
-logger = logging.getLogger(__name__)
+from config import API_BASE_URL, MAX_RETRIES, REQUEST_TIMEOUT, RETRY_DELAY
 
-# API 基础配置
-API_BASE_URL = "https://api.v2.rainyun.com"
-REQUEST_TIMEOUT = 15
-MAX_RETRIES = 3  # 最大重试次数
-RETRY_DELAY = 2  # 重试间隔（秒）
+logger = logging.getLogger(__name__)
 
 
 class RainyunAPIError(Exception):
