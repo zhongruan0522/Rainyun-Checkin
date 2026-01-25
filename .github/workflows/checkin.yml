@@ -27,3 +27,7 @@ jobs:
       
     - name: 运行
       run: python -u rainyun.py
+      env:
+        RAINYUN_USER: ${{ secrets.RAINYUN_USER }}
+        RAINYUN_PWD: ${{ secrets.RAINYUN_PWD }}
+        
