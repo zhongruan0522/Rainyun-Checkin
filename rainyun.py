@@ -449,9 +449,9 @@ def run():
 
         delay = random.randint(0, max_delay)
         delay_sec = random.randint(0, 60)
-        if not debug or os.getenv("IS_NOT_WAIT") == "true":
-            logger.info(f"随机延时等待 {delay} 分钟 {delay_sec} 秒")
-            time.sleep(delay * 60 + delay_sec)
+        # if not debug or os.getenv("IS_NOT_WAIT") == "true":
+        #     logger.info(f"随机延时等待 {delay} 分钟 {delay_sec} 秒")
+        #     time.sleep(delay * 60 + delay_sec)
         logger.info("初始化 ddddocr")
         ocr = ddddocr.DdddOcr(ocr=True, show_ad=False)
         det = ddddocr.DdddOcr(det=True, show_ad=False)
